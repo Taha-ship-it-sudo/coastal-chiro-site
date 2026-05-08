@@ -95,13 +95,6 @@ export function WelcomeOfferPopup() {
           >
             Click this link for 10% discount
           </a>
-          <button
-            type="button"
-            onClick={dismiss}
-            className="w-full text-center text-xs text-slate-500 underline-offset-2 hover:text-slate-700 hover:underline"
-          >
-            Exit popup
-          </button>
         </div>
       </div>
     </div>
