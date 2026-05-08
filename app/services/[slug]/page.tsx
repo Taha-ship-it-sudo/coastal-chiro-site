@@ -117,12 +117,6 @@ export default async function ServicePage({ params }: PageProps) {
             >
               Book Appointment
             </a>
-            <Link
-              href="/#services"
-              className="rounded-full border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-800 hover:border-slate-400"
-            >
-              Compare other services
-            </Link>
           </div>
         </article>
       </div>

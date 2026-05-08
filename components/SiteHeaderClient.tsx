@@ -12,6 +12,12 @@ const nav = [
   { href: "#faq", label: "FAQ" },
 ];
 
+function openFullscriptPopup() {
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new Event("open-fullscript-popup"));
+  }
+}
+
 export function SiteHeaderClient() {
   const [menu, setMenu] = useState(false);
 
@@ -39,6 +45,13 @@ export function SiteHeaderClient() {
               {item.label}
             </Link>
           ))}
+          <button
+            type="button"
+            onClick={openFullscriptPopup}
+            className="text-sm font-medium text-teal-700 transition hover:text-teal-800"
+          >
+            Fullscript discount
+          </button>
         </nav>
 
         <div className="flex items-center gap-2">
@@ -93,6 +106,16 @@ export function SiteHeaderClient() {
                 {item.label}
               </Link>
             ))}
+            <button
+              type="button"
+              onClick={() => {
+                setMenu(false);
+                openFullscriptPopup();
+              }}
+              className="rounded-lg px-2 py-2 text-left text-sm font-medium text-teal-700 hover:bg-slate-50"
+            >
+              Fullscript discount
+            </button>
           </nav>
         </div>
       ) : null}

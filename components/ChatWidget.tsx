@@ -3,6 +3,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 type Msg = { role: "user" | "assistant"; content: string };
+const QUICK_ACTIONS = [
+  "Book an appointment",
+  "What services do you offer?",
+  "Where are you located?",
+] as const;
 
 export function ChatWidget() {
   const [open, setOpen] = useState(false);
@@ -11,7 +16,7 @@ export function ChatWidget() {
     {
       role: "assistant",
       content:
-        "Hi, I am the after-hours assistant for Coastal Chiropractic SLO. Ask about services, new patient visits, or scheduling. For emergencies, call 911.",
+        "Hi there! I’m the after-hours assistant for Coastal Chiropractic SLO. Ask about services, new patient visits, or scheduling. For emergencies, call 911.",
     },
   ]);
   const [loading, setLoading] = useState(false);
@@ -22,8 +27,8 @@ export function ChatWidget() {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, open]);
 
-  const send = useCallback(async () => {
-    const text = input.trim();
+  const sendText = useCallback(async (rawText: string) => {
+    const text = rawText.trim();
     if (!text || loading) return;
     setError(null);
     setInput("");
@@ -51,7 +56,28 @@ export function ChatWidget() {
     } finally {
       setLoading(false);
     }
-  }, [input, loading, messages]);
+  }, [loading, messages]);
+
+  const send = useCallback(() => {
+    void sendText(input);
+  }, [input, sendText]);
+
+  function renderAssistantContent(content: string) {
+    const linkMatch = content.match(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/);
+    if (!linkMatch) return content;
+
+    const [full, label, href] = linkMatch;
+    const [before, after] = content.split(full);
+    return (
+      <>
+        {before}
+        <a href={href} target="_blank" rel="noreferrer" className="underline font-medium">
+          {label}
+        </a>
+        {after ?? ""}
+      </>
+    );
+  }
 
   return (
     <>
@@ -93,6 +119,20 @@ export function ChatWidget() {
             <p className="text-xs text-slate-500">AI assistant - not medical advice</p>
           </div>
           <div className="max-h-72 space-y-3 overflow-y-auto px-3 py-3 text-sm">
+            {messages.length === 1 ? (
+              <div className="flex flex-wrap gap-2 px-1">
+                {QUICK_ACTIONS.map((action) => (
+                  <button
+                    key={action}
+                    type="button"
+                    onClick={() => void sendText(action)}
+                    className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:border-teal-300 hover:text-teal-700"
+                  >
+                    {action}
+                  </button>
+                ))}
+              </div>
+            ) : null}
             {messages.map((m, i) => (
               <div
                 key={i}
@@ -100,7 +140,7 @@ export function ChatWidget() {
                   m.role === "user" ? "ml-6 bg-teal-700 text-white" : "mr-4 bg-slate-100 text-slate-800"
                 }`}
               >
-                {m.content}
+                {m.role === "assistant" ? renderAssistantContent(m.content) : m.content}
               </div>
             ))}
             {loading ? <p className="text-xs text-slate-500 px-1">Thinking...</p> : null}

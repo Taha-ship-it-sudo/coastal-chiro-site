@@ -24,6 +24,12 @@ export function WelcomeOfferPopup() {
   }, []);
 
   useEffect(() => {
+    const onOpen = () => setOpen(true);
+    window.addEventListener("open-fullscript-popup", onOpen);
+    return () => window.removeEventListener("open-fullscript-popup", onOpen);
+  }, []);
+
+  useEffect(() => {
     if (!open) return;
     closeBtnRef.current?.focus();
     const onKey = (e: KeyboardEvent) => {

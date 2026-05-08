@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { chatSystemPrompt } from "@/lib/clinic-context";
+import { fallbackChatReply } from "@/lib/chat-fallback";
 import { getOpenAI } from "@/lib/openai";
 
 const bodySchema = z.object({
@@ -15,17 +16,6 @@ const bodySchema = z.object({
 });
 
 export async function POST(req: Request) {
-  const openai = getOpenAI();
-  if (!openai) {
-    return NextResponse.json(
-      {
-        error:
-          "Chat is not configured. Add OPENAI_API_KEY on the server to enable the assistant.",
-      },
-      { status: 503 },
-    );
-  }
-
   let json: unknown;
   try {
     json = await req.json();
@@ -46,6 +36,12 @@ export async function POST(req: Request) {
     );
   }
 
+  const userText = messages[messages.length - 1]?.content ?? "";
+  const openai = getOpenAI();
+  if (!openai) {
+    return NextResponse.json({ reply: fallbackChatReply(userText), fallback: true });
+  }
+
   try {
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
@@ -59,15 +55,12 @@ export async function POST(req: Request) {
 
     const text = completion.choices[0]?.message?.content?.trim();
     if (!text) {
-      return NextResponse.json({ error: "Empty model response" }, { status: 502 });
+      return NextResponse.json({ reply: fallbackChatReply(userText), fallback: true });
     }
 
     return NextResponse.json({ reply: text });
   } catch (e) {
     console.error("OpenAI chat error", e);
-    return NextResponse.json(
-      { error: "The assistant is temporarily unavailable. Please call the office." },
-      { status: 502 },
-    );
+    return NextResponse.json({ reply: fallbackChatReply(userText), fallback: true });
   }
 }

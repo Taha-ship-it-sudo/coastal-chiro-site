@@ -5,6 +5,15 @@ export const CLINIC_TAGLINE =
 export const CLINIC_ADDRESS = "1025 Pacific Street, San Luis Obispo, CA 93401";
 export const CLINIC_PHONE = "(805) 439-2513";
 export const CLINIC_WEB = "https://coastalchiroslo.com";
+export const CLINIC_HOURS = [
+  "Monday: 10:00 AM - 4:30 PM",
+  "Tuesday: 8:30 AM - 5:00 PM",
+  "Wednesday: 11:00 AM - 5:00 PM",
+  "Thursday: 8:30 AM - 5:00 PM",
+  "Friday: 9:00 AM - 2:00 PM",
+  "Saturday: Closed",
+  "Sunday: Closed",
+];
 
 export const SERVICES_SUMMARY = [
   "Chiropractic care for neck pain, back pain, headaches, sciatica, and mobility limits",
@@ -21,6 +30,7 @@ Facts you may use:
 - Address: ${CLINIC_ADDRESS}
 - Phone: ${CLINIC_PHONE}
 - Website: ${CLINIC_WEB}
+- Hours: ${CLINIC_HOURS.join("; ")}
 - ${CLINIC_TAGLINE}
 - Services: ${SERVICES_SUMMARY.join("; ")}
 - The clinic focuses on evidence-informed chiropractic and soft tissue care for active adults and athletes.

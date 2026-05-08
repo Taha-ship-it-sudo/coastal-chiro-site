@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import { APPOINTMENT_URL, services } from "@/lib/services";
 
@@ -138,12 +137,6 @@ export function ServicesSection() {
                       >
                         Book this service
                       </a>
-                      <Link
-                        href={`/services/${service.slug}`}
-                        className="rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800 hover:border-slate-400"
-                      >
-                        Service details
-                      </Link>
                     </div>
                   </div>
                 ) : null}
