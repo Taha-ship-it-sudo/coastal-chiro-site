@@ -16,6 +16,8 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+**If you see “page not found”:** run `npm run dev` from this folder (the project root that contains `app/` and `package.json`), not a parent folder. If port 3000 is already in use by another app, run `npm run dev:3001` and open [http://localhost:3001](http://localhost:3001).
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
