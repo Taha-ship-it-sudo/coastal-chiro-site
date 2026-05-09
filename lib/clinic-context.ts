@@ -2,7 +2,7 @@
 export const CLINIC_NAME = "Coastal Chiropractic SLO";
 export const CLINIC_TAGLINE =
   "Specific, personalized chiropractic care for movement, recovery, and long-term wellness in San Luis Obispo.";
-export const CLINIC_ADDRESS = "1025 Pacific Street, San Luis Obispo, CA 93401";
+export const CLINIC_ADDRESS = "1029 Pacific Street, San Luis Obispo, CA 93401";
 export const CLINIC_PHONE = "(805) 439-2513";
 export const CLINIC_WEB = "https://coastalchiroslo.com";
 export const CLINIC_HOURS = [

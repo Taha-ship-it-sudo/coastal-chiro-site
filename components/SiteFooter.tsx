@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CLINIC_ADDRESS } from "@/lib/clinic-context";
 
 export function SiteFooter() {
   return (
@@ -8,9 +9,9 @@ export function SiteFooter() {
           <div>
             <p className="font-display text-lg font-semibold text-slate-900">Coastal Chiropractic SLO</p>
             <p className="mt-2 text-sm text-slate-600">
-              1025 Pacific Street
+              {CLINIC_ADDRESS.split(", ")[0]}
               <br />
-              San Luis Obispo, CA 93401
+              {CLINIC_ADDRESS.split(", ").slice(1).join(", ")}
             </p>
             <p className="mt-2">
               <a href="tel:8054392513" className="text-sm font-medium text-teal-800 hover:underline">

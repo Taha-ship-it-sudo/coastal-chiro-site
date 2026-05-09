@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { Resend } from "resend";
+import { CLINIC_ADDRESS } from "@/lib/clinic-context";
 import { appendFile, mkdir } from "fs/promises";
 import path from "path";
 
@@ -39,7 +40,7 @@ function escapeHtml(s: string) {
 
 function welcomeHtml(fullscriptCode: string | null, fullscriptNote: string | null) {
   const clinic = "Coastal Chiropractic SLO";
-  const addr = "1025 Pacific Street, San Luis Obispo, CA 93401";
+  const addr = CLINIC_ADDRESS;
   const phone = "(805) 439-2513";
 
   const safeCode = fullscriptCode ? escapeHtml(fullscriptCode) : "";
