@@ -96,6 +96,18 @@ export function WelcomeOfferPopup() {
             Click this link for 10% discount
           </a>
         </div>
+        <p className="mt-4 text-base font-semibold leading-relaxed text-slate-800">
+          Be sure to also check out My{" "}
+          <a
+            href="https://my.lactigo.com/drkolofer"
+            target="_blank"
+            rel="noreferrer"
+            className="font-bold text-teal-800 underline decoration-teal-800/40 underline-offset-2 hover:text-teal-950"
+          >
+            Lactigo
+          </a>{" "}
+          store.
+        </p>
       </div>
     </div>
   );
