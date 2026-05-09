@@ -58,11 +58,6 @@ const officeTourSlides = [
     alt: "Wood shelving with anatomy texts, knee model, plants, and clinic supplies",
     caption: "Evidence-informed care",
   },
-  {
-    src: "/images/clinic/built-ins-books-plants.png",
-    alt: "Dark wood built-ins with medical textbooks, anatomical art, and houseplants",
-    caption: "Clinical library",
-  },
 ] as const;
 
 const faqs = [
@@ -220,10 +215,6 @@ export default function Home() {
               you every step of the way.”
             </blockquote>
             <p className="mt-4 text-sm font-medium text-slate-500">— Coastal Chiropractic SLO</p>
-            <p className="mt-6 text-sm text-slate-600">
-              This redesigned page keeps the message focused and easier to scan, similar to modern
-              Central Coast provider sites.
-            </p>
           </div>
         </div>
       </section>
