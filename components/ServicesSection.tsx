@@ -144,6 +144,24 @@ export function ServicesSection() {
             );
           })}
         </div>
+
+        <div className="mt-14 max-w-2xl rounded-2xl border border-slate-200 bg-slate-50/80 px-5 py-5 sm:px-6">
+          <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+            Other providers
+          </p>
+          <p className="mt-2 text-sm leading-relaxed text-slate-600">
+            For another trusted chiropractor in San Luis Obispo, see{" "}
+            <a
+              href="https://www.honuspine.com/"
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium text-teal-800 underline decoration-teal-800/30 underline-offset-2 hover:text-teal-950"
+            >
+              Dr. Kenton Hauber
+            </a>{" "}
+            at Honu Chiropractic.
+          </p>
+        </div>
       </div>
     </section>
   );

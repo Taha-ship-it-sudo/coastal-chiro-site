@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { OfficeTourCarousel } from "@/components/OfficeTourCarousel";
 import { ServicesSection } from "@/components/ServicesSection";
 
 const steps = [
@@ -20,62 +21,49 @@ const steps = [
   },
 ];
 
-const clinicGallery = {
-  reception: {
+/** Single tour sequence: rug + lobby-wide duplicates removed */
+const officeTourSlides = [
+  {
     src: "/images/clinic/reception-desk.png",
     alt: "Light wood reception desk with live-edge counter, computer, and coastal artwork at Coastal Chiropractic SLO",
     caption: "Front desk — check in and get oriented",
   },
-  waitingRow: [
-    {
-      src: "/images/clinic/waiting-area-chairs.png",
-      alt: "Waiting area with two leather chairs, side table, lamp, and framed landscape art",
-      caption: "Comfortable seating while you wait",
-    },
-    {
-      src: "/images/clinic/waiting-area-rug.png",
-      alt: "Waiting area with leather chairs, patterned green rug, side table, and wall art",
-      caption: "Warm, relaxed lounge seating",
-    },
-  ],
-  waitingWide: {
+  {
+    src: "/images/clinic/waiting-area-chairs.png",
+    alt: "Waiting area with two leather chairs, side table, lamp, and framed landscape art",
+    caption: "Comfortable seating while you wait",
+  },
+  {
     src: "/images/clinic/waiting-room-wide.png",
     alt: "Spacious waiting room with leather chairs, green area rug, plants, and track lighting",
     caption: "Bright, open waiting space",
   },
-  waitingLobby: {
-    src: "/images/clinic/lobby-natural-light.png",
-    alt: "Reception and waiting area with wood reception desk, seating, plants, and natural light",
-    caption: "Natural light throughout the lobby",
-  },
-  treatment: {
+  {
     src: "/images/office-treatment-room.png",
     alt: "Treatment room with chiropractic table, desk, anatomy model, and professional equipment",
     caption: "Private treatment room",
   },
-  standards: [
-    {
-      src: "/images/clinic/credentials-shelf.png",
-      alt: "Palmer College of Chiropractic diploma display with clinical textbooks and plants",
-      caption: "Training & clinical references",
-    },
-    {
-      src: "/images/clinic/office-library-wall.png",
-      alt: "Built-in shelving with diplomas, anatomical models, textbooks, plants, and wellness décor",
-      caption: "Credentials and patient education resources",
-    },
-    {
-      src: "/images/clinic/shelving-plants-books.png",
-      alt: "Wood shelving with anatomy texts, knee model, plants, and clinic supplies",
-      caption: "Evidence-informed care",
-    },
-    {
-      src: "/images/clinic/built-ins-books-plants.png",
-      alt: "Dark wood built-ins with medical textbooks, anatomical art, and houseplants",
-      caption: "Clinical library",
-    },
-  ],
-} as const;
+  {
+    src: "/images/clinic/credentials-shelf.png",
+    alt: "Palmer College of Chiropractic diploma display with clinical textbooks and plants",
+    caption: "Training & clinical references",
+  },
+  {
+    src: "/images/clinic/office-library-wall.png",
+    alt: "Built-in shelving with diplomas, anatomical models, textbooks, plants, and wellness décor",
+    caption: "Credentials and patient education resources",
+  },
+  {
+    src: "/images/clinic/shelving-plants-books.png",
+    alt: "Wood shelving with anatomy texts, knee model, plants, and clinic supplies",
+    caption: "Evidence-informed care",
+  },
+  {
+    src: "/images/clinic/built-ins-books-plants.png",
+    alt: "Dark wood built-ins with medical textbooks, anatomical art, and houseplants",
+    caption: "Clinical library",
+  },
+] as const;
 
 const faqs = [
   {
@@ -129,16 +117,34 @@ const testimonials = [
 export default function Home() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-slate-200 bg-white">
-        <div className="absolute inset-0 bg-gradient-to-br from-teal-50/80 via-white to-slate-50" />
-        <div className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
-          <p className="text-sm font-semibold uppercase tracking-widest text-teal-800">
+      <section className="relative min-h-[min(100svh,52rem)] overflow-hidden border-b border-slate-200">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/hero-outdoor-care.png"
+            alt="Dr. Kolofer providing chiropractic care in an outdoor coastal setting"
+            fill
+            priority
+            className="object-cover object-[center_35%] sm:object-center"
+            sizes="100vw"
+          />
+        </div>
+        {/* Readability: stronger scrim on the left where headline sits (quieter area of the photo) */}
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-slate-950/88 via-slate-950/55 to-slate-900/20 sm:via-slate-950/40 sm:to-slate-900/10"
+          aria-hidden={true}
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-slate-950/25 sm:to-transparent"
+          aria-hidden={true}
+        />
+        <div className="relative mx-auto flex min-h-[min(100svh,52rem)] max-w-6xl flex-col justify-center px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
+          <p className="text-sm font-semibold uppercase tracking-widest text-teal-300">
             Coastal Chiropractic SLO
           </p>
-          <h1 className="font-display mt-4 max-w-3xl text-4xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-5xl lg:text-[3.25rem]">
+          <h1 className="font-display mt-4 max-w-3xl text-4xl font-semibold leading-tight tracking-tight text-white drop-shadow-sm sm:text-5xl lg:text-[3.25rem]">
             Experience natural healing through specific chiropractic care
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600">
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-100/95">
             Personalized, evidence-informed care designed to reduce discomfort, improve movement,
             and help you get back to the life and activities you value.
           </p>
@@ -147,7 +153,7 @@ export default function Home() {
               href="https://www.tebra.com/care/provider/scott-kolofer-dc-1508361098"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center rounded-full bg-teal-700 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-teal-800"
+              className="inline-flex items-center justify-center rounded-full bg-teal-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-teal-950/30 transition hover:bg-teal-400"
             >
               Make Appointment Online
             </a>
@@ -173,141 +179,8 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="mt-12 space-y-14">
-            <div>
-              <h3 className="font-display text-lg font-semibold text-slate-900">Reception</h3>
-              <div className="mt-4 mx-auto max-w-4xl">
-                <figure className="overflow-hidden rounded-2xl border border-slate-200/90 bg-slate-100 shadow-md">
-                  <div className="relative aspect-[4/3] w-full sm:aspect-[16/10]">
-                    <Image
-                      src={clinicGallery.reception.src}
-                      alt={clinicGallery.reception.alt}
-                      fill
-                      className="object-cover object-center"
-                      sizes="(max-width: 1024px) 100vw, 896px"
-                      priority
-                    />
-                  </div>
-                  <figcaption className="border-t border-slate-100 bg-white px-4 py-3 text-sm text-slate-600">
-                    {clinicGallery.reception.caption}
-                  </figcaption>
-                </figure>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="font-display text-lg font-semibold text-slate-900">
-                Waiting lounge
-              </h3>
-              <div className="mt-4 grid gap-6 sm:grid-cols-2">
-                {clinicGallery.waitingRow.map((photo) => (
-                  <figure
-                    key={photo.src}
-                    className="overflow-hidden rounded-2xl border border-slate-200/90 bg-slate-100 shadow-sm"
-                  >
-                    <div className="relative aspect-[4/3] w-full">
-                      <Image
-                        src={photo.src}
-                        alt={photo.alt}
-                        fill
-                        className="object-cover object-center"
-                        sizes="(max-width: 640px) 100vw, 50vw"
-                      />
-                    </div>
-                    <figcaption className="border-t border-slate-100 bg-white px-3 py-2.5 text-xs text-slate-600">
-                      {photo.caption}
-                    </figcaption>
-                  </figure>
-                ))}
-              </div>
-              <figure className="mt-6 overflow-hidden rounded-2xl border border-slate-200/90 bg-slate-100 shadow-sm">
-                <div className="relative aspect-[16/9] w-full sm:aspect-[2/1]">
-                  <Image
-                    src={clinicGallery.waitingWide.src}
-                    alt={clinicGallery.waitingWide.alt}
-                    fill
-                    className="object-cover object-center"
-                    sizes="(max-width: 1024px) 100vw, 1152px"
-                  />
-                </div>
-                <figcaption className="border-t border-slate-100 bg-white px-4 py-3 text-sm text-slate-600">
-                  {clinicGallery.waitingWide.caption}
-                </figcaption>
-              </figure>
-              <figure className="mt-6 overflow-hidden rounded-2xl border border-slate-200/90 bg-slate-100 shadow-sm">
-                <div className="relative aspect-[4/3] w-full">
-                  <Image
-                    src={clinicGallery.waitingLobby.src}
-                    alt={clinicGallery.waitingLobby.alt}
-                    fill
-                    className="object-cover object-center"
-                    sizes="(max-width: 1024px) 100vw, 1152px"
-                  />
-                </div>
-                <figcaption className="border-t border-slate-100 bg-white px-4 py-3 text-sm text-slate-600">
-                  {clinicGallery.waitingLobby.caption}
-                </figcaption>
-              </figure>
-            </div>
-
-            <div>
-              <h3 className="font-display text-lg font-semibold text-slate-900">
-                Treatment suite
-              </h3>
-              <div className="mt-4 grid gap-8 lg:grid-cols-12 lg:items-center">
-                <figure className="overflow-hidden rounded-2xl border border-slate-200/90 bg-slate-100 shadow-md lg:col-span-7">
-                  <div className="relative aspect-[4/5] w-full sm:aspect-[3/4]">
-                    <Image
-                      src={clinicGallery.treatment.src}
-                      alt={clinicGallery.treatment.alt}
-                      fill
-                      className="object-cover object-center"
-                      sizes="(max-width: 1024px) 100vw, 58vw"
-                    />
-                  </div>
-                  <figcaption className="border-t border-slate-100 bg-white px-4 py-3 text-sm text-slate-600">
-                    {clinicGallery.treatment.caption}
-                  </figcaption>
-                </figure>
-                <div className="lg:col-span-5">
-                  <p className="text-sm leading-relaxed text-slate-600">
-                    Clean treatment zones with room for hands-on care, movement checks, and recovery
-                    planning — so each visit feels focused and unhurried.
-                  </p>
-                  <p className="mt-4 text-sm text-slate-500">Coastal Chiropractic SLO</p>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="font-display text-lg font-semibold text-slate-900">
-                Library & credentials
-              </h3>
-              <p className="mt-2 max-w-2xl text-sm text-slate-600">
-                Education-forward care — from anatomy references to the standards we train under.
-              </p>
-              <div className="mt-6 grid gap-6 sm:grid-cols-2">
-                {clinicGallery.standards.map((photo) => (
-                  <figure
-                    key={photo.src}
-                    className="overflow-hidden rounded-2xl border border-slate-200/90 bg-slate-100 shadow-sm"
-                  >
-                    <div className="relative aspect-[4/3] w-full">
-                      <Image
-                        src={photo.src}
-                        alt={photo.alt}
-                        fill
-                        className="object-cover object-center"
-                        sizes="(max-width: 640px) 100vw, 50vw"
-                      />
-                    </div>
-                    <figcaption className="border-t border-slate-100 bg-white px-3 py-2.5 text-xs text-slate-600">
-                      {photo.caption}
-                    </figcaption>
-                  </figure>
-                ))}
-              </div>
-            </div>
+          <div className="mt-10">
+            <OfficeTourCarousel slides={officeTourSlides} />
           </div>
         </div>
       </section>

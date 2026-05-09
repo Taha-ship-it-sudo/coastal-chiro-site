@@ -30,11 +30,6 @@ export function SiteFooter() {
               <li>
                 <Link href="#first-visit" className="hover:text-teal-800">New Patients</Link>
               </li>
-              <li>
-                <a href="https://coastalchiroslo.com/" className="hover:text-teal-800" target="_blank" rel="noreferrer">
-                  Live site
-                </a>
-              </li>
             </ul>
           </div>
           <div>
